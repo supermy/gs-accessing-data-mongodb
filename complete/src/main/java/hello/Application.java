@@ -25,12 +25,12 @@ public class Application implements CommandLineRunner {
 		repository.save(new Customer("Bob", "Smith"));
 
 		// fetch all customers
-		System.out.println("Customers found with findAll():");
-		System.out.println("-------------------------------");
-		for (Customer customer : repository.findAll()) {
-			System.out.println(customer);
-		}
-		System.out.println();
+//		System.out.println("Customers found with findAll():");
+//		System.out.println("-------------------------------");
+//		for (Customer customer : repository.findAll()) {
+//			System.out.println(customer);
+//		}
+//		System.out.println();
 
 		// fetch an individual customer
 		System.out.println("Customer found with findByFirstName('Alice'):");
@@ -43,6 +43,14 @@ public class Application implements CommandLineRunner {
 			System.out.println(customer);
 		}
 
-	}
+        //压力测试100万条的测试时间
+        long start=System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            repository.save(new Customer("Bob"+i, "Smith"));
+        }
+        long end=System.currentTimeMillis();
+        System.out.println("have time:"+(end-start)+"ms");
+
+    }
 
 }
